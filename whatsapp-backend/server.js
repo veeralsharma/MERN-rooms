@@ -22,9 +22,9 @@ app.use((req,res,next) => {
 var Pusher = require('pusher');
 
 var pusher = new Pusher({
-  appId: '1084673',
-  key: '8cadf13e057b0770bd69',
-  secret: '1e1de289b73191e97d5e',
+  appId: process.env.PUSHER_APP_ID,
+  key: process.env.PUSHER_KEY,
+  secret: process.env.PUSHER_SECRET,
   cluster: 'ap2',
   encrypted: true
 });
