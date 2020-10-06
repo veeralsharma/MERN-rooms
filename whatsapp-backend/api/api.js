@@ -17,9 +17,9 @@ module.exports = function (params) {
 
   })
 
-  api.get("/messages/sync" , async (req,res) => {
+  api.post("/messages/sync" , async (req,res) => {
 
-    Messages.find({},(err,data) => {
+    Messages.find({group:req.body.group},(err,data) => {
         if(err){
           res.status(500).send(err);
         }else{

@@ -50,7 +50,7 @@ db.once("open" , () => {
                 name:messageDetails.name,
                 message:messageDetails.message,
                 timestamp:messageDetails.timestamp,
-                recieved:messageDetails.recieved
+                group:messageDetails.group
             })
         }else{
             console.log("error triggering pusher");

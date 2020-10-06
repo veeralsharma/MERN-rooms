@@ -11,6 +11,11 @@
     border-right: 1px solid lightgray;
 }
 
+.sidebar_header > h3{
+    margin-top: 8px;
+    margin-left: -100px;
+}
+
 .sidebar_headerRight{
     display: flex;
     align-items: center;

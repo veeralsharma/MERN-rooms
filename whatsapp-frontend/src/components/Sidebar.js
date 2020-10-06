@@ -7,15 +7,20 @@ import MoreVertIcon from "@material-ui/icons/MoreVert";
 import Avatar from "@material-ui/core/Avatar";
 import SearchOutlined from "@material-ui/icons/SearchOutlined";
 import SidebarChat from "./SidebarChat";
+import { useStateValue } from '../context-api/StateProvider';
+
 
 function Sidebar() {
+
+  const [{user,group},dispatch] = useStateValue()
+
   return (
     <div className="sidebar">
       <div className="sidebar_header">
         <Avatar
-          src="https://encrypted-tbn0.gstatic.com/
-                images?q=tbn%3AANd9GcS_Ap2vH4q2oChRKUAq8cwahQ6yi1hpqL5RXw&usqp=CAU"
+          src={user.photoURL}
         />
+        <h3>{user.displayName}</h3>
         <div className="sidebar_headerRight">
           <IconButton>
             <DonutLargeIcon />
@@ -38,17 +43,17 @@ function Sidebar() {
         <SidebarChat 
         url="https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcQ6xhytlrcUemgvBvuccp4E6FARuSkoMqkB1w&usqp=CAU"
         roomname="Health Support"
-        lastmessage="beds empty at ...."
+        description="providing medical help and support to those who need"
          />
         <SidebarChat 
         url="https://eatforum.org/content/uploads/2018/05/table_with_food_top_view_900x700.jpg"
         roomname="Food Support"
-        lastmessage="Free Lunch facility in area ...."
+        description="providing free food those who need"
          />
         <SidebarChat 
         url="https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcTHfcrpjN7KPP_CGeaSRkrB1RTzCaz-8bGS6Q&usqp=CAU"
         roomname="Transportation Support"
-        lastmessage="train to bihar with 100 seats will leave at ...."
+        description="helping people reach their homes"
          />
       </div>
     </div>

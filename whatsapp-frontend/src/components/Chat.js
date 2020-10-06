@@ -7,9 +7,12 @@ import AttachFileOutlinedIcon from "@material-ui/icons/AttachFileOutlined";
 import SearchOutlined from "@material-ui/icons/SearchOutlined";
 import InsertEmoticonOutlinedIcon from "@material-ui/icons/InsertEmoticonOutlined";
 import MicOutlinedIcon from "@material-ui/icons/MicOutlined";
+import { useStateValue } from '../context-api/StateProvider';
 import Api from '../Api'
 
 function Chat({messages}) {
+
+  const [{user,group},dispatch] = useStateValue()
 
   const [input,setInput] = useState("")
 
@@ -17,8 +20,8 @@ function Chat({messages}) {
       e.preventDefault()
       await Api.post('/messages/new',{
         message:input,
-        name:"Admin",
-        recieved:true,
+        name:user.displayName,
+        group:group.name,
         timestamp:new Date().toUTCString()
       })
       setInput("")
@@ -27,10 +30,10 @@ function Chat({messages}) {
   return (
     <div className="chat">
       <div className="chat_header">
-        <Avatar />
+        <Avatar src={group.image} />
         <div className="chat_headerInfo">
-          <h3>Room name</h3>
-          <p>Last seen at ....</p>
+          <h3>{group.name}</h3>
+          <p>{group.description}</p>
         </div>
         <div className="chat_headerRight">
           <IconButton>
@@ -46,7 +49,7 @@ function Chat({messages}) {
       </div>
       <div className="chat_body">
       {messages.map((msg) => (
-        <p className={`chat_message ${msg.recieved && "chat_reciever"}`}>
+        <p className={`chat_message ${msg.name==user.displayName && "chat_reciever"}`}>
           <span className="chat_name">{msg.name}</span>
           {msg.message}
           <span className="chat_timestamp">{msg.timestamp}</span>

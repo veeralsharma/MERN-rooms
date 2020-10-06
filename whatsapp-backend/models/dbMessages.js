@@ -10,8 +10,8 @@ const whatsappBody = {
   timestamp: {
     type: String,
   },
-  recieved:{
-      type:Boolean
+  group:{
+      type:String
   }
 };
 const whatsappSchema = mongoose.Schema(whatsappBody);
