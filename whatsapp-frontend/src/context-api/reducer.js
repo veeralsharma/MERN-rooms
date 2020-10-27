@@ -4,12 +4,14 @@ export const initialState = {
         description:"providing medical help and support to those who need",
         image:"https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcQ6xhytlrcUemgvBvuccp4E6FARuSkoMqkB1w&usqp=CAU"
     },
-    user:null
+    user:null,
+    joined_groups:null
 }
 
 export const actionTypes = {
     SET_USER:"SET_USER",
-    SET_GROUP:"SET_GROUP"
+    SET_GROUP:"SET_GROUP",
+    SET_JOINED_GROUPS:"SET_JOINED_GROUPS"
 }
 
 const reducer = (state,action) => {
@@ -24,6 +26,11 @@ const reducer = (state,action) => {
             return{
                 ...state,
                 group:action.group
+            }
+        case actionTypes.SET_JOINED_GROUPS:
+            return{
+                ...state,
+                joined_groups:action.joined_groups
             }
         default:
             return state;

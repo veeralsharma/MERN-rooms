@@ -4,6 +4,7 @@ import { actionTypes } from '../context-api/reducer'
 import { useStateValue } from '../context-api/StateProvider'
 import "../css/Login.css"
 import {auth , provider} from "../firebase"
+import Api from "../Api"
 
 function Login() {
 
@@ -11,7 +12,20 @@ function Login() {
 
     const signIn = (e) => {
         e.preventDefault()
-        auth.signInWithPopup(provider).then((res) => {
+        auth.signInWithPopup(provider).then(async (res) => {
+            const dbuser={
+                name:res.user.displayName,
+                profile_image:res.user.photoURL,
+                email:res.user.email
+            }
+            await Api.post("/login",dbuser).then((res) => {
+                console.log(res.data);
+                dispatch({
+                    type:actionTypes.SET_JOINED_GROUPS,
+                    joined_groups:res.data.msg.joined_groups
+                })
+            })
+            
             dispatch({
                 type:actionTypes.SET_USER,
                 user:res.user

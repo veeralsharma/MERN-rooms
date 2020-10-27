@@ -7,20 +7,36 @@ import MoreVertIcon from "@material-ui/icons/MoreVert";
 import Avatar from "@material-ui/core/Avatar";
 import SearchOutlined from "@material-ui/icons/SearchOutlined";
 import SidebarChat from "./SidebarChat";
-import { useStateValue } from '../context-api/StateProvider';
-
+import { useStateValue } from "../context-api/StateProvider";
+import MenuItem from "@material-ui/core/MenuItem";
+import Menu from "@material-ui/core/Menu";
 
 function Sidebar() {
+  const [{ user, group, joined_groups }, dispatch] = useStateValue();
+  const [anchorEl, setAnchorEl] = React.useState(null);
 
-  const [{user,group},dispatch] = useStateValue()
+  const handleClick = (event) => {
+    setAnchorEl(event.currentTarget);
+  };
+
+  const handleClose = () => {
+    setAnchorEl(null);
+  };
+
+  function logout(){
+    window.location.reload()
+  }
+
+  function JoinGroup(){
+  }
+
+  function CreateGroup(){
+  }
 
   return (
     <div className="sidebar">
       <div className="sidebar_header">
-        <Avatar
-          src={user.photoURL}
-        />
-        <h3>{user.displayName}</h3>
+        <Avatar src={user.photoURL} />
         <div className="sidebar_headerRight">
           <IconButton>
             <DonutLargeIcon />
@@ -28,9 +44,25 @@ function Sidebar() {
           <IconButton>
             <ChatIcon />
           </IconButton>
-          <IconButton>
+          <IconButton
+            aria-controls="simple-menu"
+            aria-haspopup="true"
+            onClick={handleClick}
+          >
             <MoreVertIcon />
           </IconButton>
+          <Menu
+            id="simple-menu"
+            anchorEl={anchorEl}
+            keepMounted
+            open={Boolean(anchorEl)}
+            onClose={handleClose}
+          >
+            <MenuItem onClick={handleClose}>Profile</MenuItem>
+            <MenuItem onClick={JoinGroup}>Join Group</MenuItem>
+            <MenuItem onClick={CreateGroup}>Create Group</MenuItem>
+            <MenuItem onClick={logout}>Logout</MenuItem>
+          </Menu>
         </div>
       </div>
       <div className="sidebar_search">
@@ -40,21 +72,16 @@ function Sidebar() {
         </div>
       </div>
       <div className="sidebar_chats">
-        <SidebarChat 
-        url="https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcQ6xhytlrcUemgvBvuccp4E6FARuSkoMqkB1w&usqp=CAU"
-        roomname="Health Support"
-        description="providing medical help and support to those who need"
-         />
-        <SidebarChat 
-        url="https://eatforum.org/content/uploads/2018/05/table_with_food_top_view_900x700.jpg"
-        roomname="Food Support"
-        description="providing free food those who need"
-         />
-        <SidebarChat 
-        url="https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcTHfcrpjN7KPP_CGeaSRkrB1RTzCaz-8bGS6Q&usqp=CAU"
-        roomname="Transportation Support"
-        description="helping people reach their homes"
-         />
+        {joined_groups.map((grp) => {
+          return (
+            <SidebarChat
+              url={grp.image_url}
+              roomname={grp.group_name}
+              description={grp.description}
+              code={grp.group_code}
+            />
+          );
+        })}
       </div>
     </div>
   );
