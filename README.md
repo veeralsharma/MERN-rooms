@@ -10,3 +10,4 @@ projects database - mongoose cloud atlas
 
 other important technologies used - pusher to interact realtime witch mongoose database
 
+![output of app](https://github.com/veeralsharma/MERN-Whatsapp-rooms/blob/master/main.png)
