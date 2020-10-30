@@ -4,7 +4,7 @@ import "../css/SidebarChat.css"
 import { useStateValue } from '../context-api/StateProvider';
 import { actionTypes } from '../context-api/reducer'
 
-function SidebarChat({url,roomname,description}) {
+function SidebarChat({url,roomname,description,group_code}) {
 
     const [{user,group},dispatch] = useStateValue()
 
@@ -14,7 +14,8 @@ function SidebarChat({url,roomname,description}) {
             group:{
                 name:roomname,
                 description:description,
-                image:url
+                image:url,
+                group_code:group_code
             }
         })
         console.log(url);

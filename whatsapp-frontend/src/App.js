@@ -1,3 +1,4 @@
+
 import React, { useEffect, useState } from 'react';
 import './App.css';
 import Chat from './components/Chat';
@@ -36,8 +37,6 @@ function App() {
     }
     
   },[messages])
-
-  console.log(messages);
 
   return (
     <div className="app">

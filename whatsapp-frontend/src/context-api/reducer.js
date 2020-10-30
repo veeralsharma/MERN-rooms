@@ -2,7 +2,8 @@ export const initialState = {
     group:{
         name:"Health Support",
         description:"providing medical help and support to those who need",
-        image:"https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcQ6xhytlrcUemgvBvuccp4E6FARuSkoMqkB1w&usqp=CAU"
+        image:"https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcQ6xhytlrcUemgvBvuccp4E6FARuSkoMqkB1w&usqp=CAU",
+        group_code:"GRP-boyrtT"
     },
     user:null,
     joined_groups:null

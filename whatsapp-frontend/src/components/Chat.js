@@ -33,7 +33,7 @@ function Chat({messages}) {
         <Avatar src={group.image} />
         <div className="chat_headerInfo">
           <h3>{group.name}</h3>
-          <p>{group.description}</p>
+          <p>invite people using - {group.group_code}</p>
         </div>
         <div className="chat_headerRight">
           <IconButton>
