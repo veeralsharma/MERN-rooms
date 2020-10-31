@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import "../css/Sidebar.css";
 import ChatIcon from "@material-ui/icons/Chat";
 import DonutLargeIcon from "@material-ui/icons/DonutLarge";
@@ -17,6 +17,7 @@ import DialogTitle from "@material-ui/core/DialogTitle";
 import Button from "@material-ui/core/Button";
 import TextField from "@material-ui/core/TextField";
 import Api from "../Api";
+import { actionTypes } from '../context-api/reducer'
 
 function Sidebar() {
   const [{ user, group, joined_groups }, dispatch] = useStateValue();
@@ -62,6 +63,10 @@ function Sidebar() {
       console.log(res.data);
       Setjoingroupopen(false);
       Setjoingroupcode("")
+      dispatch({
+        type:actionTypes.SET_JOINED_GROUPS,
+        joined_groups:[...joined_groups,res.data.msg]
+    })
     })
   }
 
@@ -97,6 +102,10 @@ function Sidebar() {
         image_url: "",
         email: user.email,
       });
+      dispatch({
+        type:actionTypes.SET_JOINED_GROUPS,
+        joined_groups:[...joined_groups,res.data.msg]
+    })
     });
   }
 
@@ -190,7 +199,7 @@ function Sidebar() {
                 Cancel
               </Button>
               <Button onClick={CreateGroup} color="primary" autoFocus>
-                Join
+                Create
               </Button>
             </DialogActions>
           </Dialog>

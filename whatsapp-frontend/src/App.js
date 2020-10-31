@@ -11,7 +11,7 @@ import Login from './components/Login';
 
 function App() {
 
-  const [{user,group},dispatch] = useStateValue()
+  const [{user,group,joined_groups},dispatch] = useStateValue()
 
   const [messages,setMessages] = useState([])
 

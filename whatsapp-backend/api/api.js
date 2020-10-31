@@ -74,7 +74,7 @@ module.exports = function (params) {
                 })
                 res.json({
                   status: "1",
-                  msg: "created",
+                  msg: {group_name:gp.group_name,image_url:gp.image_url,description:gp.description,group_code:gp.group_code},
                 });
               }
             });
@@ -207,6 +207,29 @@ module.exports = function (params) {
       });
     });
 
+    api.post('/joined_groups/all',async (req,res) => {
+      User.findOne({email:req.body.email} , (err,user) => {
+        if(err){
+          res.json({
+            status:"-1",
+            msg:"An error occured"
+          })
+        }else{
+          if(user){
+            res.json({
+              status:"1",
+              msg:user.joined_groups
+            })
+          }else{
+            res.json({
+              status:"0",
+              msg:"No user found with valid email"
+            })
+          }
+        }
+      })
+    })
+
     api.post("/group/join", async (req, res) => {
       Group.findOne({ group_code: req.body.group_code }, async (err, gp) => {
         if (err) {
@@ -237,7 +260,7 @@ module.exports = function (params) {
                       gp.save();
                       res.json({
                         status: "1",
-                        msg: "success",
+                        msg: newgrp,
                       });
                     } else {
                       res.json({

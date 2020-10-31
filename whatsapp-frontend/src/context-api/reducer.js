@@ -12,7 +12,7 @@ export const initialState = {
 export const actionTypes = {
     SET_USER:"SET_USER",
     SET_GROUP:"SET_GROUP",
-    SET_JOINED_GROUPS:"SET_JOINED_GROUPS"
+    SET_JOINED_GROUPS:"SET_JOINED_GROUPS",
 }
 
 const reducer = (state,action) => {
